@@ -8,9 +8,11 @@ var engine = require('ejs-locals');
 var passport = require('passport');
 var session  = require('express-session');
 var database = require('./config/database');
-var routes = require('./routes/index');
 
 var app = express();
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
+
 
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');
@@ -31,13 +33,14 @@ app.use(passport.session());
 
 database.connect();
 
+var routes = require('./routes/index')(io);
 app.use('/', routes);
 
 
-app.listen(8000, function(err) {
+server.listen(8080, function(err) {
   if (err) {
     console.log(err);
   } else {
-    console.log("Port is running on 8000");
+    console.log("Port is running on 8080");
   }
 });

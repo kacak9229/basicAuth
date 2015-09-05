@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 module.exports = {
   connect: function() {
-    mongoose.connect('mongodb://root:root@ds035593.mongolab.com:35593/instagranauth', function(err) {
+    mongoose.connect('mongodb://root:abc123@ds035553.mongolab.com:35553/facebook', function(err) {
       if (err) {
         console.log(err);
       } else {
